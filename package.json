@@ -4,6 +4,7 @@
   "description": "Learning Vue.js 2.0",
   "main": "index.js",
   "scripts": {
+    "prestart":"npm install",
     "start": "browser-sync start --server . --directory --files \"step-*\" --no-notify"
   },
   "repository": {

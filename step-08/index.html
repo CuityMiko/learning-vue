@@ -13,7 +13,8 @@
   <script>
     Vue.component('list', {
       props: ['todos'],
-      template: '<ol><item v-for="item in todos">{{ item.text }}</item></ol>'
+      template: '<ol><item v-for="item in todos" :key="item.id">{{ item.text }}</item></ol>'
+      // template: '<ol><item v-for="(item,index) in todos" :key="index">{{ item.text }},{{index}}</item></ol>'
     })
     Vue.component('item', {
       props: ['todo'],
@@ -23,9 +24,9 @@
       el: '#app',
       data: {
         todos: [
-          { text: 'Learn JavaScript' },
-          { text: 'Learn Vue' },
-          { text: 'Build something awesome' }
+          { text: 'Learn JavaScript',id:1 },
+          { text: 'Learn Vue',id:2 },
+          { text: 'Build something awesome',id:3 }
         ]
       }
     })

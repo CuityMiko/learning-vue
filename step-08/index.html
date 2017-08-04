@@ -18,7 +18,23 @@
     })
     Vue.component('item', {
       props: ['todo'],
-      template: '<li><slot></slot></li>'
+      data(){
+        return {
+          testaaa:90
+        }
+      },
+      methods:{
+        add(){
+          this.testaaa++;
+        }
+      },
+      watch:{
+        testaaa(newval,oldval){
+          console.log(newval);
+          console.log(oldval);
+        }
+      },
+      template: '<li><slot></slot><input type="text" v-model="testaaa" /><button @click="add">Add</button></li>'
     })
     var app = new Vue({
       el: '#app',

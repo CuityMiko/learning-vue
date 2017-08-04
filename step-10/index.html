@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue自定义组件</title>
+    <link rel="stylesheet" href="../src/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../src/bower_components/animate.css/animate.css">
+    <style scoped>
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <form class="form-inline">
+            <div class="form-group">
+                <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                <div class="input-group">
+                    <div class="input-group-addon">活动名称</div>
+                    <input type="text" class="form-control" id="actname" placeholder="请输入提示信息..." v-model="alertinfo">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                <div class="input-group">
+                    <div class="input-group-addon">类型</div>
+                    <input type="text" class="form-control" id="actname" placeholder="请输入类型..." @keyup.enter="changetype">
+                </div>
+            </div>
+            <button type="button" class="btn btn-success" @click="open">打开</button>
+            <button type="button" class="btn btn-info" @click="close">关闭</button>
+        </form>
+        <alert :warnalert="warnalert">{{ alertinfo }}</alert>
+    </div>
+
+    <script src="../src/bower_components/jquery/dist/jquery.js"></script>
+    <script src="../src/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script src="./components.js"></script>
+    <script>    
+        let vm=new Vue({
+            el:'#app',
+            data:{
+                alertinfo:'',
+                warnalert:{
+                    title:'警告！',
+                    warnshow:true,
+                    info:'',
+                    alerttype:'success'
+                }
+            },
+            watch:{
+                alertinfo(newval){
+                    this.warnalert.info=newval;
+                }
+            },
+            methods:{
+                close(){
+                    this.warnalert.warnshow=false;
+                },
+                open(){
+                    this.warnalert.warnshow=true;
+                },
+                changetype(e){
+                    if(e.target.value)
+                        this.warnalert.alerttype=e.target.value;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

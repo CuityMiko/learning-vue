@@ -8,6 +8,7 @@
 <body>
   <div id="app">
     <p>{{ counter }}</p>
+    <p>{{ testaa }}</p>
     <button v-on:click="increase"> +1 </button>
   </div>
   <script src="../node_modules/vue/dist/vue.js"></script>
@@ -20,6 +21,11 @@
       methods: {
         increase () {
           this.counter++
+        }
+      },
+      computed:{
+        testaa(){
+          return this.counter+3;
         }
       }
     })

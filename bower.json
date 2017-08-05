@@ -1,0 +1,28 @@
+{
+  "name": "learning-vue",
+  "description": "Learning Vue.js 2.0",
+  "main": "index.js",
+  "authors": [
+    "iceStone <ice@micua.com> (http://www.micua.com/)"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "learning",
+    "vue",
+    "vue.js",
+    "iceStone"
+  ],
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1"
+  }
+}

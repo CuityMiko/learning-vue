@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue自定义组件</title>
+    <link rel="stylesheet" href="../src/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../src/bower_components/animate.css/animate.css">
+    <style scoped>
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <testp :msg="title"></testp>
+    </div>
+
+    <script src="../src/bower_components/jquery/dist/jquery.js"></script>
+    <script src="../src/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script src="./components.js"></script>
+    <script>    
+        let vm=new Vue({
+            el:'#app',
+            data:{
+                title:'在子组件中增加数据'
+            },
+            methods:{
+
+            }
+        })
+    </script>
+</body>
+</html>

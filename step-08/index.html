@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Step 08 - Component property</title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css">
+</head>
+<body>
+  <div id="app">
+    <list v-bind:todos="todos"></list>
+  </div>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    Vue.component('list', {
+      props: ['todos'],
+      template: '<ol><item v-for="item in todos" :key="item.id">{{ item.text }}</item></ol>'
+      // template: '<ol><item v-for="(item,index) in todos" :key="index">{{ item.text }},{{index}}</item></ol>'
+    })
+    Vue.component('item', {
+      props: ['todo'],
+      data(){
+        return {
+          testaaa:90
+        }
+      },
+      methods:{
+        add(){
+          this.testaaa++;
+        }
+      },
+      watch:{
+        testaaa(newval,oldval){
+          console.log(newval);
+          console.log(oldval);
+        }
+      },
+      template: '<li><slot></slot><input type="text" v-model="testaaa" /><button @click="add">Add</button></li>'
+    })
+    var app = new Vue({
+      el: '#app',
+      data: {
+        todos: [
+          { text: 'Learn JavaScript',id:1 },
+          { text: 'Learn Vue',id:2 },
+          { text: 'Build something awesome',id:3 }
+        ]
+      }
+    })
+  </script>
+</body>
+</html>

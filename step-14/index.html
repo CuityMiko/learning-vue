@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue自定义组件-分页组件</title>
+    <link rel="stylesheet" href="../src/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../src/bower_components/animate.css/animate.css">
+    <link rel="stylesheet" href="./laypage/skin/laypage.css" />
+    <style scoped>
+        #app{
+            margin: 12px;
+        }
+        .form-inline{
+            margin-top: 15px;
+        }
+        .row{
+            border: 1px solid #DCDCDC;
+            padding: 11px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th width="10%">id</th>
+                    <th width="30%">name</th>
+                    <th width="40%">content</th>
+                    <th width="20%">remark</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="data in tableList">
+                    <td v-text="data.num"></td>
+                    <td v-text="data.author"></td>
+                    <td v-text="data.contents"></td>
+                    <td v-text="data.remark"></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <div class="pull-left">
+                             <button class="btn btn-default" @click="refresh">刷新2</button> 
+                        </div>
+                        <div class="pull-right">
+                            <bpage :async="false" :data="lists" :lens="lenArr" :page-len="pageLen" :param="param"></bpage>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table> -->
+
+        <div class="row">
+            <div class="pull-left">
+                <select class="form-control" v-model="pagerconfig.pagesize" @change="changepager">
+                    <option :value="item" v-for="(item,index) in pagerconfig.pagecapacity" :key="index">{{ item }}</option>
+                </select>
+            </div>
+            <div class="pull-right">
+                <div id="dpager"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../src/bower_components/jquery/dist/jquery.js"></script>
+    <script src="../src/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="./laypage/laypage.js"></script>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script src="./components.js"></script>
+    <script>    
+        let vm=new Vue({
+            el:'#app',
+            data:{
+                pagerconfig:{
+                    pageindex:1,
+                    pagesize:10,
+                    total:386, // 总条数
+                    pagecapacity:[10,20,30,40,50]
+                }
+            },
+            mounted(){
+                this.pager(false)
+            },
+            methods:{
+                bindpage(pageindex){
+                    console.log(pageindex)
+                },
+                pager(flag){
+                    let _self=this;
+                    _self.pagerconfig.pageindex=flag?1:_self.pagerconfig.pageindex;
+                    let _totalpage=Math.ceil(_self.pagerconfig.total / parseInt(_self.pagerconfig.pagesize));
+                    let _info=`<span style="font-size:14px;">（共<strong>${_self.pagerconfig.total}</strong>条数据）</span>`
+                    laypage({
+                        cont: 'dpager', //容器
+                        pages: _totalpage, //通过后台拿到的总页数
+                        curr: _self.pagerconfig.pageindex, //当前页
+                        skip: true, //是否开启跳页
+                        skin: '#5c90d2', //加载内置皮肤
+                        groups: 8, //连续显示分页数
+                        jump: function (obj, first) { //触发分页后的回调
+                            $("#dpager").children().append(_info);
+                            if (!first) { //点击跳页触发函数自身，并传递当前页：obj.curr
+                                _self.bindpage(obj.curr);
+                            }
+                        }
+                    });
+                },
+                changepager(){
+                    this.pager(true);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

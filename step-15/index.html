@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue自定义组件-分页组件</title>
+    <link rel="stylesheet" href="../src/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../src/bower_components/animate.css/animate.css">
+    <link rel="stylesheet" href="./laypage/skin/laypage.css" />
+    <style scoped>
+        #app{
+            margin: 12px;
+        }
+        .form-inline{
+            margin-top: 15px;
+        }
+        .row{
+            border: 1px solid #DCDCDC;
+            padding: 11px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <form class="form-inline">
+            <div class="input-group">
+                <div class="input-group-addon">Total</div>
+                <input type="number" class="form-control" placeholder="请输入..." v-model="pagerconfig.total">
+            </div>
+        </form>
+        <bpage :pagerconfig="pagerconfig" @pagechange="bindpage"/>
+    </div>
+
+    <script src="../src/bower_components/jquery/dist/jquery.js"></script>
+    <script src="../src/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="./laypage/laypage.js"></script>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script src="./components.js"></script>
+    <script>    
+        let vm=new Vue({
+            el:'#app',
+            data:{
+                pagerconfig:{
+                    total:100, // 总条数
+                    pagecapacity:[10,20,30,40,50]
+                }
+            },
+            methods:{
+                bindpage(pageindex){
+                    console.log(pageindex)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -34,7 +34,19 @@
             <button type="button" class="btn btn-primary" @click='open'>打 开</button>
         </form>
         <!-- modal -->
-        <bmodal :modalconfig="modalconfig" @confirm="save">这是一个弹窗</bmodal>
+        <bmodal :modalconfig="modalconfig" :form="form" @confirm="save">
+            <form role="form">
+				<div class="form-group">
+					 <label for="username">用户名</label><input type="text" class="form-control" id="username" v-model="form.username" placeholder="请输入用户名..." />
+				</div>
+				<div class="form-group">
+					 <label for="userpwd">密码</label><input type="password" class="form-control" id="userpwd" v-model="form.userpwd" placeholder="请输入密码..." />
+				</div>
+				<div class="checkbox">
+					 <label><input type="checkbox" v-model="form.isrm" />记住我</label>
+				</div>
+			</form>
+        </bmodal>
     </div>
 
     <script src="../src/bower_components/jquery/dist/jquery.js"></script>
@@ -52,6 +64,11 @@
                     istip:false,
                     canceltxt:'',
                     confirmtxt:''
+                },
+                form:{
+                    username:'',
+                    userpwd:'',
+                    isrm:false
                 }
             },
             mounted(){
@@ -59,7 +76,9 @@
             methods:{
                 open(){
                     this.modalconfig.open=true;
-                    this.modalconfig.confirm=this.fetchData;
+                    this.form.username='';
+                    this.form.userpwd='';
+                    this.form.isrm=false
                 },
                 save(obj){
                     console.log(obj)

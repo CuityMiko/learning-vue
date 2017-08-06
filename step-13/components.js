@@ -1,5 +1,5 @@
 /**
- * 自定义Modal组件
+ * 自定义Modal-Form组件
  *  配置
  *  modalconfig:{
         open:false,
@@ -13,7 +13,7 @@
     confirm:点击确定按钮触发的事件
  */
 Vue.component('bmodal',{
-    props:['modalconfig'],
+    props:['modalconfig','form'],
     data(){
         return {
             btncls:'btn'
@@ -44,8 +44,9 @@ Vue.component('bmodal',{
     methods:{
         // 确定
         toConfirm(){
-            let obj={ id:11,name:'zhangsan' }
-            this.$emit('confirm',obj)
+            let _self=this;
+            console.log(_self.form)
+            _self.$emit('confirm',_self.form)
             $('.bmodal').modal('hide');
         }
     },

@@ -7,6 +7,10 @@
     <title>Vue自定义组件-Modal弹窗</title>
     <link rel="stylesheet" href="../src/bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../src/bower_components/animate.css/animate.css">
+    <script src="../src/bower_components/jquery/dist/jquery.js"></script>
+    <script src="../src/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script src="./components.js"></script>
     <style scoped>
         #app{
             margin: 12px;
@@ -15,75 +19,35 @@
 </head>
 <body>
     <div id="app">
-        <select name="" id="" class="form-control" v-model="tiptype">
-            <option value="info"><strong style="color:#D9EDF7">info</strong></option>
-            <option value="success"><strong style="color:#DFF0D8">success</strong></option>
-            <option value="warning"><strong style="color:#FCF8E3">warning</strong></option>
-            <option value="danger"><strong style="color:#F2DEDE">danger</strong></option>
-        </select>
-        
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
-
-        <!-- Small modal -->
-        <div class="tipsmodal modal fade bs-example-modal-sm" data-backdrop="false" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <span :style="tipstyle">这是一段提示信息</span>
-                    </div>
-                </div>
+        <form class="form-inline">
+            <div class="input-group">
+                <div class="input-group-addon">提示信息</div>
+                <input type="text" class="form-control" placeholder="请输入提示信息..." v-model="tipconfig.msg">
             </div>
-        </div>
+            <select class="form-control" v-model="tipconfig.tiptype">
+                <option value="info">info</option>
+                <option value="success">success</option>
+                <option value="warning">warning</option>
+                <option value="danger">danger</option>
+            </select>
+            <button type="button" class="btn btn-primary" @click='open'>打 开</button>
+        </form>
+        <!-- 自定义Tip Modal组件 -->
+        <tipbox :tipconfig="tipconfig" />
     </div>
-
-    <script src="../src/bower_components/jquery/dist/jquery.js"></script>
-    <script src="../src/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="../node_modules/vue/dist/vue.js"></script>
-    <script src="./components.js"></script>
     <script>    
         let vm=new Vue({
             el:'#app',
             data:{
-                tiptype:'info',
-            },
-            computed: {
-                tipstyle(){
-                    let _self=this;
-                    let _style='color:#1E90FF';
-                    switch (_self.tiptype) {
-                        case 'info':
-                            _style='color:#1E90FF';
-                            break;
-                        case 'success':
-                            _style='color:#00CD00';
-                            break;
-                        case 'warning':
-                            _style='color:#EEDC82';
-                            break;
-                        case 'danger':
-                            _style='color:#FF0000';
-                            break;
-                        default:
-                            _style='color:#1E90FF';
-                            break;
-                    }
-                    return _style;
+                tipconfig:{
+                    tiptype:'info',
+                    open:false,
+                    msg:''
                 }
-            },
-            mounted(){
-                $('.tipsmodal').on('show.bs.modal', function () {
-                    console.log('小窗体被打开了');
-                    setTimeout(()=>{
-                        $('.tipsmodal').modal('hide')
-                    },2000)
-                })
-                $('.tipsmodal').on('hide.bs.modal', function () {
-                    // 执行一些动作...
-                    console.log('关闭了')
-                })
             },
             methods:{
                 open(){
+                    this.tipconfig.open=true;
                 }
             }
         })

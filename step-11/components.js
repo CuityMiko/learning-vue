@@ -1,11 +1,10 @@
 /**
  * 提示框
  */
-Vue.Component('tipbox',{
+Vue.component('tipbox',{
     props:['tipconfig'],
     data(){
         return {
-
         }
     },
     computed: {
@@ -33,26 +32,31 @@ Vue.Component('tipbox',{
         }
     },
     watch:{
-        'tipconfig.open':(newval)=>{
+        'tipconfig.open':(newval)=>{            
             if(newval)
                 $('.tipsmodal').modal('show');
-            else
-                $('.tipsmodal').modal('hide');
         }
     },
     mounted(){
+        let _self=this;
         $('.tipsmodal').on('show.bs.modal', function () {
-            console.log('小窗体被打开了');
+            _self.tipconfig.open=false;
             setTimeout(()=>{
                 $('.tipsmodal').modal('hide')
             },2000)
         })
-        $('.tipsmodal').on('hide.bs.modal', function () {
-            // 执行一些动作...
-            console.log('关闭了')
-        })
     },
     methods:{
     },
-    template:''
+    template:`
+        <div class="tipsmodal modal fade bs-example-modal-sm" data-backdrop="false" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <span :style="tipstyle">{{ tipconfig.msg }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `
 })

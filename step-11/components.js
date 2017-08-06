@@ -1,5 +1,10 @@
 /**
  * 提示框
+ * tipconfig:{
+        tiptype:'info',
+        open:false,
+        msg:''
+    }
  */
 Vue.component('tipbox',{
     props:['tipconfig'],

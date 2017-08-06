@@ -54,7 +54,7 @@ Vue.component('tipbox',{
     methods:{
     },
     template:`
-        <div class="tipsmodal modal fade bs-example-modal-sm" data-backdrop="false" tabindex="-1" role="dialog">
+        <div class="tipsmodal modal fade in bs-example-modal-sm" data-backdrop="false" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content">
                     <div class="modal-body">

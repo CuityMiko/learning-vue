@@ -20,16 +20,15 @@ Vue.component('bpage', {
     },
     watch: {
         'pagerconfig.total': function(newval) {
-            this.pager(false);
+            this.pager();
         }
     },
     mounted() {
-        this.pager(false)
+        this.pager()
     },
     methods: {
-        pager(flag) {
+        pager() {
             let _self = this;
-            _self.pageinit.pageindex = flag ? 1 : _self.pageinit.pageindex;
             let _totalpage = Math.ceil(parseInt(_self.pagerconfig.total) / parseInt(_self.pageinit.pagesize));
             let _info = `<span style="font-size:14px;">（共<strong>${_self.pagerconfig.total}</strong>条数据）</span>`
             laypage({
@@ -48,8 +47,12 @@ Vue.component('bpage', {
                 }
             });
         },
+        // 更换pagesize
         changepager() {
+            let _self = this;
             this.pager(true);
+            _self.pageinit.pageindex = 1;
+            _self.$emit('pagechange', _self.pageinit);
         }
     },
     template: `
@@ -63,4 +66,4 @@ Vue.component('bpage', {
                 <div id="dpager"></div>
             </div>
         </div>`
-})
+});

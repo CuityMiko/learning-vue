@@ -27,10 +27,14 @@ Vue.component('bpage', {
         this.pager()
     },
     methods: {
-        pager() {
+        pager(flag) {
             let _self = this;
             let _totalpage = Math.ceil(parseInt(_self.pagerconfig.total) / parseInt(_self.pageinit.pagesize));
-            let _info = `<span style="font-size:14px;">（共<strong>${_self.pagerconfig.total}</strong>条数据）</span>`
+            let _info = `<span style="font-size:14px;">（共<strong>${_self.pagerconfig.total}</strong>条数据）</span>`;
+            if (flag) {
+                _self.pageinit.pageindex = 1;
+                $("#dpager").html('');
+            }
             laypage({
                 cont: 'dpager', //容器
                 pages: _totalpage, //通过后台拿到的总页数

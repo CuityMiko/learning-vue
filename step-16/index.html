@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content=" ">
+    <meta name="keywords" content="">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Vue-SUI Mobile</title>
+    <!-- SUI Mobile -->
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/??sm.min.css,sm-extend.min.css">
+    <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/??sm.min.js,sm-extend.min.js' charset='utf-8'></script>
+    <style scoped>
+        [v-cloak]{
+            display: none; 
+        }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <div class="page">
+            <header class="bar bar-nav">
+                <a class="button button-link button-nav pull-left" href="javascript:window.history.go(-1)" data-transition='slide-out'>
+                    <span class="icon icon-left"></span>
+                    返回
+                </a>
+                <button class="button button-link button-nav pull-right open-popup">
+                    分享
+                    <span class="icon icon-share"></span>
+                </button>
+                <h1 class="title">{{title}}</h1>
+            </header>
+            <nav class="bar bar-tab">
+                <a class="tab-item active" href="#">
+                <span class="icon icon-home"></span>
+                <span class="tab-label">首页</span>
+                </a>
+                <a class="tab-item" href="#">
+                <span class="icon icon-me"></span>
+                <span class="tab-label">我</span>
+                </a>
+                <a class="tab-item" href="#">
+                <span class="icon icon-star"></span>
+                <span class="tab-label">收藏</span>
+                </a>
+                <a class="tab-item" href="#">
+                <span class="icon icon-settings"></span>
+                <span class="tab-label">设置</span>
+                </a>
+            </nav>
+            <div class="content infinite-scroll infinite-scroll-bottom" data-distance="10">
+                <!-- 这里是页面内容区 -->
+                <div class="list-block media-list">
+                    <ul class="list-container">
+                        <li v-for="item in 20" :key="item">
+                            <div class="item-content">
+                            <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" style='width: 2.2rem;'></div>
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                <div class="item-title">标题{{ item }}</div>
+                                </div>
+                                <div class="item-subtitle">子标题{{ item }}</div>
+                            </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- About Popup -->
+            <div class="popup popup-about" style="top: 76%;">
+                <div class="content-block">
+                    <header class="bar bar-nav">
+                        <button class="button button-link button-nav pull-right close-popup">
+                            关闭
+                            <span class="icon icon-down"></span>
+                        </button>
+                        <h1 class="title">分享到</h1>
+                    </header>
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-33">
+                                <div class="">
+                                    <img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" style="width:100%">
+                                </div>
+                            </div>
+                            <div class="col-33">
+                                <img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" style="width:100%">
+                            </div>
+                            <div class="col-33">
+                                <img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" style="width:100%">
+                            </div>
+                        </div>
+                    </div> 
+                    <!-- <div class="content">
+                        <div class="card">
+                            <div class="card-header">新的公布:</div>
+                            <div class="card-content">
+                            <div class="list-block media-list">
+                                <ul>
+                                <li class="item-content">
+                                    <div class="item-media">
+                                    <img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="44">
+                                    </div>
+                                    <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title">标题</div>
+                                    </div>
+                                    <div class="item-subtitle">子标题</div>
+                                    </div>
+                                </li>
+                                </ul>
+                            </div>
+                            </div>
+                            <div class="card-footer">
+                            <span>2015/01/15</span>
+                            <span>5 评论</span>
+                            </div>
+                        </div>        
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script src="./components.js"></script>
+    <script>    
+        let vm=new Vue({
+            el:'#app',
+            data:{
+                title:'Vue-SUI Mobile的使用'
+            },
+            mounted(){
+            },
+            methods:{
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SUI-Mobile</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+
+    <style type="text/css">
+      .infinite-scroll-preloader {
+        margin-top:-20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+        <div class="page">
+            <header class="bar bar-nav">
+                <a class="button button-link button-nav pull-left" href="/demos/card" data-transition='slide-out'>
+                <span class="icon icon-left"></span>
+                返回
+                </a>
+                <h1 class="title">SUI-Mobile-List</h1>
+            </header>
+            <nav class="bar bar-tab">
+                <a class="tab-item active" href="#">
+                <span class="icon icon-home"></span>
+                <span class="tab-label">首页</span>
+                </a>
+                <a class="tab-item" href="#">
+                <span class="icon icon-me"></span>
+                <span class="tab-label">我</span>
+                </a>
+                <a class="tab-item" href="#">
+                <span class="icon icon-star"></span>
+                <span class="tab-label">收藏</span>
+                </a>
+                <a class="tab-item" href="#">
+                <span class="icon icon-settings"></span>
+                <span class="tab-label">设置</span>
+                </a>
+            </nav>
+            <div class="content">
+                <!-- 这里是页面内容区 -->
+                <!-- 添加 class infinite-scroll 和 data-distance  向下无限滚动可不加infinite-scroll-bottom类，这里加上是为了和下面的向上无限滚动区分-->
+                <div class="content infinite-scroll infinite-scroll-bottom" data-distance="100">
+                    <div class="list-block">
+                        <ul class="list-container">
+                            <li class="item-content" v-for="(item,index) in nums" :key="index">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        {{ 'item'+item }}
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- 加载提示符 -->
+                    <div class="infinite-scroll-preloader" v-show="loading">
+                        <div class="preloader"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            data:{
+                max:60,
+                nums:20,
+                loading:false
+            },
+            mounted(){
+                let _self=this;
+                let scroller = $('.infinite-scroll-bottom')
+                scroller.on('scroll',()=>{
+                    if(_self.loading)
+                        return;
+                    let height = parseFloat(scroller.height())
+                    let scrollTop = parseFloat(scroller.scrollTop())
+                    let totalHeight = height + scrollTop
+                    if (scroller[0].scrollHeight - totalHeight <= 1) {
+                        if(_self.nums>=_self.max){
+                            $.toast('到底啦！');
+                        }else{
+                            _self.loading=true;
+                            $.showPreloader();
+                            setTimeout(()=>{
+                                _self.nums+=10;
+                                let upscrollTop = scroller[0].scrollHeight - scroller.height() - 30
+                                scroller.scrollTop(upscrollTop)
+                                _self.loading=false;
+                                $.hidePreloader();
+                            },3000)
+                        }
+                    }
+                })
+            }
+        }).$mount('#app')
+    </script>
+  </body>
+</html>
